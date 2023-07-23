@@ -25,3 +25,10 @@ petBreed table wil be used to map pets to their respective breeds, allowing one 
 ### Shelter Information:
 * System must store information about shelters where pets are available for adoption.
 * Each shelter will have a unique ID, name, address, and phone number.
+
+
+### ERD:
+![Adopt-A-PetopiaERD](https://github.com/natalientang/adopt-a-petopia/assets/108561054/9610b5cc-7672-4a55-bec3-6891e72df5a7)
+
+### Wireframe:
+https://www.figma.com/file/NcsWc12Fnb2xrZIFK8poQ8/Adopt-A-Petopia?type=design&node-id=0%3A1&mode=design&t=xKsqVeMXrPGE3kmS-1

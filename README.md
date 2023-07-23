@@ -1,6 +1,6 @@
 # Adopt-A-Petopia
 
-### With the increasing importance of pet adoption and finding loving homes for animals in need, this project aims to connect loving homes with adorable and deserving pets in need of adoption. Whether you're looking to adopt a furry friend or find a new family for a rescued animal, Adopt-A-Petopia is a web-based application to encourage pet adoption and facilitate the adoption process to make it easy and enjoyable.
+With the increasing importance of pet adoption and finding loving homes for animals in need, this project aims to connect loving homes with adorable and deserving pets in need of adoption. Whether you're looking to adopt a furry friend or find a new family for a rescued animal, Adopt-A-Petopia is a web-based application to encourage pet adoption and facilitate the adoption process to make it easy and enjoyable.
 
 ### Pet Information Management:
 * System must store information about each pet available for adoption.

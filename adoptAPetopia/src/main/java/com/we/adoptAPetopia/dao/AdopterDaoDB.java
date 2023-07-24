@@ -5,9 +5,11 @@ import com.we.adoptAPetopia.mappers.AdopterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class AdopterDaoDB implements AdopterDao {
     @Autowired
     JdbcTemplate jdbc;
@@ -47,10 +49,10 @@ public class AdopterDaoDB implements AdopterDao {
 
     @Override
     public void deleteAdopterById(int id) {
-        final String DELETE_ADOPTION = "DELETE FROM adoption where adoptionId = ?";
+        final String DELETE_ADOPTION = "DELETE FROM adoption WHERE adopterId = ?";
         jdbc.update(DELETE_ADOPTION, id);
 
-        final String DELETE_ADOPTER = "DELETE FROM adopter where adopterId = ?";
+        final String DELETE_ADOPTER = "DELETE FROM adopter WHERE adopterId = ?";
         jdbc.update(DELETE_ADOPTER, id);
     }
 }

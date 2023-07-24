@@ -34,7 +34,7 @@ class PetDaoDBTest {
     }
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         List<Adopter> adopters = adopterDao.getAllAdopters();
         adopters.forEach(adopter -> {
             adopterDao.deleteAdopterById(adopter.getId());
@@ -67,7 +67,7 @@ class PetDaoDBTest {
     }
 
     @Test
-    void testAddAndGetPetById() {
+    public void testAddAndGetPetById() {
         Breed breed = new Breed();
         breed.setName("Golden Retriever");
         breed.setDescription("Friendly, loyal, and intelligent family companion with a soft coat.");
@@ -99,7 +99,7 @@ class PetDaoDBTest {
     }
 
     @Test
-    void testGetAllPets() {
+    public void testGetAllPets() {
         Breed breed = new Breed();
         breed.setName("Golden Retriever");
         breed.setDescription("Friendly, loyal, and intelligent family companion with a soft coat.");
@@ -142,7 +142,7 @@ class PetDaoDBTest {
     }
 
     @Test
-    void testUpdatePet() {
+    public void testUpdatePet() {
         Breed breed = new Breed();
         breed.setName("Golden Retriever");
         breed.setDescription("Friendly, loyal, and intelligent family companion with a soft coat.");
@@ -181,7 +181,7 @@ class PetDaoDBTest {
     }
 
     @Test
-    void testDeletePetById() {
+    public void testDeletePetById() {
         Species species = new Species();
         species.setName("Dog");
         species.setDescription("Loyal tail-wagger, always by your side, spreading joy.");

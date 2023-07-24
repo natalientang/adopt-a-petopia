@@ -51,7 +51,7 @@ public class SpeciesDaoDB implements SpeciesDao {
     @Override
     @Transactional
     public void deleteSpeciesById(int id) {
-        final String UPDATE_PET = "UPDATE pet SET petId = NULL WHERE petId = ?";
+        final String UPDATE_PET = "UPDATE pet SET speciesId = NULL WHERE speciesId = ?";
         jdbc.update(UPDATE_PET, id);
 
         final String DELETE_SPECIES = "DELETE FROM species WHERE speciesId = ?";

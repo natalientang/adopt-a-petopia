@@ -1,13 +1,11 @@
 package com.we.adoptAPetopia.dao;
 
 import com.we.adoptAPetopia.entities.*;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +26,7 @@ class ShelterDaoDBTest {
     }
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         List<Breed> breeds = breedDao.getAllBreeds();
         breeds.forEach(breed -> {
             breedDao.deleteBreedById(breed.getId());
@@ -46,7 +44,7 @@ class ShelterDaoDBTest {
     }
 
     @Test
-    void testAddAndGetShelterById() {
+    public void testAddAndGetShelterById() {
         Shelter shelter = new Shelter();
         shelter.setName("Pawsitive Haven");
         shelter.setAddress("123 Park Ave, Anytown, USA");
@@ -58,7 +56,7 @@ class ShelterDaoDBTest {
     }
 
     @Test
-    void testGetAllShelters() {
+    public void testGetAllShelters() {
         Shelter shelter1 = new Shelter();
         shelter1.setName("Pawsitive Haven");
         shelter1.setAddress("123 Park Ave, Anytown, USA");
@@ -78,7 +76,7 @@ class ShelterDaoDBTest {
     }
 
     @Test
-    void testUpdateShelter() {
+    public void testUpdateShelter() {
         Shelter shelter = new Shelter();
         shelter.setName("Pawsitive Haven");
         shelter.setAddress("123 Park Ave, Anytown, USA");
@@ -97,7 +95,7 @@ class ShelterDaoDBTest {
     }
 
     @Test
-    void testDeleteShelterById() {
+    public void testDeleteShelterById() {
         Shelter shelter = new Shelter();
         shelter.setName("Pawsitive Haven");
         shelter.setAddress("123 Park Ave, Anytown, USA");

@@ -1,7 +1,6 @@
 package com.we.adoptAPetopia.dao;
 
 import com.we.adoptAPetopia.entities.*;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +27,11 @@ class BreedDaoDBTest {
     @Autowired
     SpeciesDao speciesDao;
 
-    LocalDateTime date = LocalDateTime.now();
-
     public BreedDaoDBTest() {
     }
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         List<Adopter> adopters = adopterDao.getAllAdopters();
         adopters.forEach(adopter -> {
             adopterDao.deleteAdopterById(adopter.getId());
@@ -67,7 +64,7 @@ class BreedDaoDBTest {
     }
 
     @Test
-    void testAddAndGetBreedById() {
+    public void testAddAndGetBreedById() {
         Breed breed = new Breed();
         breed.setName("Golden Retriever");
         breed.setDescription("Friendly, loyal, and intelligent family companion with a soft coat.");
@@ -79,7 +76,7 @@ class BreedDaoDBTest {
     }
 
     @Test
-    void testGetAllBreeds() {
+    public void testGetAllBreeds() {
         Breed breed1 = new Breed();
         breed1.setName("Golden Retriever");
         breed1.setDescription("Friendly, loyal, and intelligent family companion with a soft coat.");
@@ -100,7 +97,7 @@ class BreedDaoDBTest {
     }
 
     @Test
-    void testUpdateBreed() {
+    public void testUpdateBreed() {
         Breed breed = new Breed();
         breed.setName("Golden Retriever");
         breed.setDescription("Friendly, loyal, and intelligent family companion with a soft coat.");
@@ -119,7 +116,7 @@ class BreedDaoDBTest {
     }
 
     @Test
-    void testDeleteBreedById() {
+    public void testDeleteBreedById() {
         Breed breed = new Breed();
         breed.setName("Golden Retriever");
         breed.setDescription("Friendly, loyal, and intelligent family companion with a soft coat.");
@@ -153,7 +150,7 @@ class BreedDaoDBTest {
     }
 
     @Test
-    void testGetBreedsByPet() {
+    public void testGetBreedsByPet() {
         Breed breed1 = new Breed();
         breed1.setName("Golden Retriever");
         breed1.setDescription("Friendly, loyal, and intelligent family companion with a soft coat.");

@@ -1,7 +1,6 @@
 package com.we.adoptAPetopia.dao;
 
 import com.we.adoptAPetopia.entities.*;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ class AdopterDaoDBTest {
     }
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         List<Adopter> adopters = adopterDao.getAllAdopters();
         adopters.forEach(adopter -> {
             adopterDao.deleteAdopterById(adopter.getId());
@@ -67,7 +66,7 @@ class AdopterDaoDBTest {
     }
 
     @Test
-    void testAddAndGetAdopterById() {
+    public void testAddAndGetAdopterById() {
         Adopter adopter = new Adopter();
         adopter.setName("Isabella Johnson");
         adopter.setEmail("isabella123@example.com");
@@ -80,7 +79,7 @@ class AdopterDaoDBTest {
     }
 
     @Test
-    void testGetAllAdopters() {
+    public void testGetAllAdopters() {
         Adopter adopter1 = new Adopter();
         adopter1.setName("Isabella Johnson");
         adopter1.setEmail("isabella123@example.com");
@@ -102,7 +101,7 @@ class AdopterDaoDBTest {
     }
 
     @Test
-    void testUpdateAdopter() {
+    public void testUpdateAdopter() {
         Adopter adopter = new Adopter();
         adopter.setName("Isabella Johnson");
         adopter.setEmail("isabella123@example.com");
@@ -122,7 +121,7 @@ class AdopterDaoDBTest {
     }
 
     @Test
-    void testDeleteAdopterById() {
+    public void testDeleteAdopterById() {
         Species species = new Species();
         species.setName("Dog");
         species.setDescription("Loyal tail-wagger, always by your side, spreading joy.");

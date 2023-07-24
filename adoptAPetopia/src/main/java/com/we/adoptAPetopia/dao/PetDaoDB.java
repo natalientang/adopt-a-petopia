@@ -1,11 +1,13 @@
 package com.we.adoptAPetopia.dao;
 
+import com.we.adoptAPetopia.entities.Breed;
 import com.we.adoptAPetopia.entities.Pet;
 import com.we.adoptAPetopia.mappers.PetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,22 +33,37 @@ public class PetDaoDB implements PetDao {
     }
 
     @Override
+    @Transactional
     public Pet addPet(Pet pet) {
         final String sql = "INSERT INTO pet(name, speciesId, description, shelterId) " + "VALUES(?,?,?,?)";
         jdbc.update(sql, pet.getName(), pet.getSpecies().getId(), pet.getDescription(), pet.getShelter().getId());
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         pet.setId(newId);
+        insertPetBreed(pet);
         return pet;
     }
 
     @Override
+    @Transactional
     public void updatePet(Pet pet) {
         final String sql = "UPDATE pet SET name = ?, speciesId = ?, description = ?, shelterId = ? WHERE petId = ?";
         jdbc.update(sql, pet.getName(), pet.getSpecies().getId(), pet.getDescription(), pet.getShelter().getId(), pet.getId());
+
+        final String DELETE_PET_BREED = "DELETE FROM petBreed WHERE petId = ?";
+        jdbc.update(DELETE_PET_BREED, pet.getId());
+        insertPetBreed(pet);
+    }
+
+    private void insertPetBreed(Pet pet) {
+        final String sql = "INSERT INTO petBreed(petId, breedId) " + "VALUES(?,?)";
+        for(Breed breed : pet.getBreeds()) {
+            jdbc.update(sql, pet.getId(), breed.getId());
+        }
     }
 
     @Override
+    @Transactional
     public void deletePetById(int id) {
         final String DELETE_PET_BREED = "DELETE FROM petBreed WHERE petId = ?";
         jdbc.update(DELETE_PET_BREED, id);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class AdoptionDaoDB implements AdoptionDao {
     }
 
     @Override
+    @Transactional
     public Adoption addAdoption(Adoption adoption) {
         final String sql = "INSERT INTO adoption(date, petId, adopterId) " + "VALUES(?,?,?)";
         jdbc.update(sql, adoption.getDate(), adoption.getPet().getId(), adoption.getAdopter().getId());

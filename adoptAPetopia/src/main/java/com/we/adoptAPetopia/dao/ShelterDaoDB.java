@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class ShelterDaoDB implements ShelterDao {
     }
 
     @Override
+    @Transactional
     public Shelter addShelter(Shelter shelter) {
         final String sql = "INSERT INTO shelter(name, address, phone) " + "VALUES(?,?,?)";
         jdbc.update(sql, shelter.getName(), shelter.getAddress(), shelter.getPhone());
@@ -47,6 +49,7 @@ public class ShelterDaoDB implements ShelterDao {
     }
 
     @Override
+    @Transactional
     public void deleteShelterById(int id) {
         final String UPDATE_PET = "UPDATE pet SET shelterId = NULL WHERE shelterId = ?";
         jdbc.update(UPDATE_PET, id);

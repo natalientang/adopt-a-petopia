@@ -2,13 +2,19 @@ package com.we.adoptAPetopia.dao;
 
 import com.we.adoptAPetopia.entities.Breed;
 import com.we.adoptAPetopia.entities.Pet;
+import com.we.adoptAPetopia.entities.Shelter;
+import com.we.adoptAPetopia.entities.Species;
+import com.we.adoptAPetopia.mappers.BreedMapper;
 import com.we.adoptAPetopia.mappers.PetMapper;
+import com.we.adoptAPetopia.mappers.ShelterMapper;
+import com.we.adoptAPetopia.mappers.SpeciesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 @Repository
@@ -20,7 +26,34 @@ public class PetDaoDB implements PetDao {
     public Pet getPetById(int id) {
         try {
             final String sql = "SELECT * FROM pet WHERE petId = ?";
-            return jdbc.queryForObject(sql, new PetMapper(), id);
+            Pet pet = jdbc.queryForObject(sql, new PetMapper(), id);
+            pet.setSpecies(getSpeciesForPet(id));
+            pet.setShelter(getShelterForPet(id));
+            pet.setBreeds(getBreedsForPet(id));
+            return pet;
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    private List<Breed> getBreedsForPet(int id) {
+        final String sql = "SELECT b.* " + "FROM pet p " + "JOIN petBreed pb ON p.petId = pb.petId " + "JOIN breed b ON pb.breedId = b.breedId " + "WHERE p.petId = ?";
+        return jdbc.query(sql, new BreedMapper(), id);
+    }
+
+    private Shelter getShelterForPet(int id) {
+        try {
+            final String sql = "SELECT s.* FROM pet p " + "JOIN shelter s ON p.shelterId = s.shelterId " + "WHERE p.petId = ?";
+            return jdbc.queryForObject(sql, new ShelterMapper(), id);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    private Species getSpeciesForPet(int id) {
+        try {
+            final String sql = "SELECT s.* FROM pet p " + "JOIN species s ON p.speciesId = s.speciesId " + "WHERE p.petId = ?";
+            return jdbc.queryForObject(sql, new SpeciesMapper(), id);
         } catch (DataAccessException ex) {
             return null;
         }
@@ -28,8 +61,19 @@ public class PetDaoDB implements PetDao {
 
     @Override
     public List<Pet> getAllPets() {
-        final String sql = "SELECT * FROM pet";
-        return jdbc.query(sql, new PetMapper());
+        try{
+            final String sql = "SELECT * FROM pet";
+            List<Pet> petList = jdbc.query(sql, new PetMapper());
+
+            for(Pet pet : petList) {
+                pet.setSpecies(getSpeciesForPet(pet.getId()));
+                pet.setShelter(getShelterForPet(pet.getId()));
+                pet.setBreeds(getBreedsForPet(pet.getId()));
+            }
+            return petList;
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
 
     @Override

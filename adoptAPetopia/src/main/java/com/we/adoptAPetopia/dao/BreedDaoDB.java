@@ -30,7 +30,7 @@ public class BreedDaoDB implements BreedDao {
     }
 
     private List<Pet> getPetsByBreed(Breed breed) {
-        final String sql = "SELECT DISTINCT p.* FROM pet p INNER JOIN petBreed pb ON p.petId = pb.petId WHERE breedId = ?";
+        final String sql = "SELECT DISTINCT p.* FROM pet p " + "INNER JOIN petBreed pb ON p.petId = pb.petId " + "WHERE breedId = ?";
         return jdbc.query(sql, new PetMapper(), breed.getId());
     }
 

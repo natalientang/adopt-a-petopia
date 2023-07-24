@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class AdopterDaoDB implements AdopterDao {
     }
 
     @Override
+    @Transactional
     public Adopter addAdopter(Adopter adopter) {
         final String sql = "INSERT INTO adopter(name, email, phone, address) " + "VALUES(?,?,?,?)";
         jdbc.update(sql, adopter.getName(), adopter.getEmail(), adopter.getPhone(), adopter.getAddress());
@@ -48,6 +50,7 @@ public class AdopterDaoDB implements AdopterDao {
     }
 
     @Override
+    @Transactional
     public void deleteAdopterById(int id) {
         final String DELETE_ADOPTION = "DELETE FROM adoption WHERE adopterId = ?";
         jdbc.update(DELETE_ADOPTION, id);

@@ -1,11 +1,13 @@
 package com.we.adoptAPetopia.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Breed {
     private int id;
     private String name;
     private String description;
+    private List<Pet> pets;
 
     public int getId() {
         return id;
@@ -31,23 +33,47 @@ public class Breed {
         this.description = description;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public List<Pet> getPets() {
+        return pets;
+    }
 
-        Breed breed = (Breed) o;
-
-        if (id != breed.id) return false;
-        if (!Objects.equals(name, breed.name)) return false;
-        return Objects.equals(description, breed.description);
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+        int hash = 7;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.name);
+        hash = 89 * hash + Objects.hashCode(this.description);
+        hash = 89 * hash + Objects.hashCode(this.pets);
+        return hash;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Breed other = (Breed) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.pets, other.pets)) {
+            return false;
+        }
+        return true;
     }
 }

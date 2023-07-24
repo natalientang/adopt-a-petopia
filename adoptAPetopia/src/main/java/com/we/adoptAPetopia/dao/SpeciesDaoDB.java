@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class SpeciesDaoDB implements SpeciesDao {
     }
 
     @Override
+    @Transactional
     public Species addSpecies(Species species) {
         final String sql = "INSERT INTO species(name, description) " + "VALUES(?,?)";
         jdbc.update(sql, species.getName(), species.getDescription());
@@ -47,6 +49,7 @@ public class SpeciesDaoDB implements SpeciesDao {
     }
 
     @Override
+    @Transactional
     public void deleteSpeciesById(int id) {
         final String UPDATE_PET = "UPDATE pet SET petId = NULL WHERE petId = ?";
         jdbc.update(UPDATE_PET, id);

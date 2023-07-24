@@ -30,6 +30,9 @@ class AdopterDaoDBTest {
 
     LocalDateTime date = LocalDateTime.now();
 
+    public AdopterDaoDBTest() {
+    }
+
     @BeforeEach
     void setUp() {
         List<Adopter> adopters = adopterDao.getAllAdopters();

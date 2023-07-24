@@ -43,7 +43,7 @@ public class AdoptionDaoDB implements AdoptionDao {
     @Override
     public void updateAdoption(Adoption adoption) {
         final String sql = "UPDATE adoption SET date = ?, petId = ?, adopterId = ? WHERE adoptionId = ?";
-        jdbc.update(sql, adoption.getDate(), adoption.getPet().getId(), adoption.getAdopter().getId());
+        jdbc.update(sql, adoption.getDate(), adoption.getPet().getId(), adoption.getAdopter().getId(), adoption.getId());
     }
 
     @Override

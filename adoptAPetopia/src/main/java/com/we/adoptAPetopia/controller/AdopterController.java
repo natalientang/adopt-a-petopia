@@ -2,7 +2,6 @@ package com.we.adoptAPetopia.controller;
 
 import com.we.adoptAPetopia.entities.Adopter;
 import com.we.adoptAPetopia.service.AdopterService;
-import com.we.adoptAPetopia.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +16,6 @@ import java.util.List;
 public class AdopterController {
     @Autowired
     AdopterService adopterService;
-
-    @Autowired
-    PetService petService;
 
     @GetMapping("adopters")
     public String displayAdopters(Model model) {

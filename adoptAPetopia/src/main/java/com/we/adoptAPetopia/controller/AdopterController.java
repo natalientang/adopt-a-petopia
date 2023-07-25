@@ -28,7 +28,7 @@ public class AdopterController {
     public String displayAddAdopter(Model model) {
         Adopter adopter = new Adopter();
         model.addAttribute("adopter", adopter);
-        return "addAdopter";
+        return "adopterAdd";
     }
 
     @PostMapping("addAdopter")

@@ -34,7 +34,7 @@ public class AdopterController {
     @PostMapping("addAdopter")
     public String addAdopter(@Valid Adopter adopter, BindingResult result) {
         if (result.hasErrors()) {
-            return "addAdopter";
+            return "adopterAdd";
         }
         adopterService.addAdopter(adopter);
         return "redirect:/adopters";
@@ -44,13 +44,13 @@ public class AdopterController {
     public String displayEditAdopter(Integer id, Model model) {
         Adopter adopter = adopterService.getAdopterById(id);
         model.addAttribute("adopter", adopter);
-        return "editAdopter";
+        return "adopterEdit";
     }
 
     @PostMapping("editAdopter")
     public String editAdopter(@Valid Adopter adopter, BindingResult result) {
         if (result.hasErrors()) {
-            return "editAdopter";
+            return "adopterEdit";
         }
         adopterService.updateAdopter(adopter);
         return "redirect:/adopters";

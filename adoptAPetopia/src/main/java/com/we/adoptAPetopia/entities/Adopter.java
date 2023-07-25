@@ -1,12 +1,22 @@
 package com.we.adoptAPetopia.entities;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class Adopter {
     private int id;
+    @NotBlank(message = "Name must not be blank!")
+    @Size(max = 25, message = "Name must be fewer than 25 characters")
     private String name;
+    @NotBlank(message = "Email must not be blank!")
+    @Size(max = 50, message = "Email must be fewer than 50 characters")
     private String email;
+    @NotBlank(message = "Phone must not be blank!")
+    @Size(max = 25, message = "Phone must be fewer than 25 characters")
     private String phone;
+    @NotBlank(message = "Address must not be blank!")
+    @Size(max = 255, message = "Address must be fewer than 255 characters")
     private String address;
 
     public int getId() {

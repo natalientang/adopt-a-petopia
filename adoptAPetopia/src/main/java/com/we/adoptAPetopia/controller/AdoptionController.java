@@ -63,7 +63,7 @@ public class AdoptionController {
         return "editAdoption";
     }
 
-    @PostMapping("editAdopter")
+    @PostMapping("editAdoption")
     public String editAdoption(@Valid Adoption adoption, BindingResult result, Model model) {
         if (result.hasErrors()) {
             List<Pet> pets = petService.getAllPets();
@@ -72,7 +72,7 @@ public class AdoptionController {
             List<Adopter> adopters = adopterService.getAllAdopters();
             model.addAttribute("adopters", adopters);
 
-            return "editAdopter";
+            return "editAdoption";
         }
         adoptionService.updateAdoption(adoption);
         return "redirect:/adoptions";

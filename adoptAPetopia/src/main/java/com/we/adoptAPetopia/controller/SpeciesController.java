@@ -28,13 +28,13 @@ public class SpeciesController {
     public String displayAddSpecies(Model model) {
         Species species = new Species();
         model.addAttribute("species", species);
-        return "addSpecies";
+        return "speciesAdd";
     }
 
     @PostMapping("addSpecies")
     public String addSpecies (@Valid Species species, BindingResult result) {
         if (result.hasErrors()) {
-            return "addSpecies";
+            return "speciesAdd";
         }
         speciesService.addSpecies(species);
         return "redirect:/species";
@@ -44,13 +44,13 @@ public class SpeciesController {
     public String displayEditSpecies(Integer id, Model model) {
         Species species = speciesService.getSpeciesById(id);
         model.addAttribute("species", species);
-        return "editSpecies";
+        return "speciesEdit";
     }
 
     @PostMapping("editSpecies")
     public String editSpecies(@Valid Species species, BindingResult result) {
         if (result.hasErrors()) {
-            return "editSpecies";
+            return "speciesEdit";
         }
         speciesService.updateSpecies(species);
         return "redirect:/species";

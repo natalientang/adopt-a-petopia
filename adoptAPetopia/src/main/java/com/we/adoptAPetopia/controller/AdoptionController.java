@@ -44,13 +44,13 @@ public class AdoptionController {
         List<Adopter> adopters = adopterService.getAllAdopters();
         model.addAttribute("adopters", adopters);
 
-        return "addAdoption";
+        return "adoptionAdd";
     }
 
     @PostMapping("addAdoption")
     public String addAdoption(@Valid Adoption adoption, BindingResult result) {
         if (result.hasErrors()) {
-            return "addAdoption";
+            return "adoptionAdd";
         }
         adoptionService.addAdoption(adoption);
         return "redirect:/adoptions";
@@ -60,7 +60,7 @@ public class AdoptionController {
     public String displayEditAdoption(Integer id, Model model) {
         Adoption adoption = adoptionService.getAdoptionById(id);
         model.addAttribute("adoption", adoption);
-        return "editAdoption";
+        return "adoptionEdit";
     }
 
     @PostMapping("editAdoption")
@@ -72,7 +72,7 @@ public class AdoptionController {
             List<Adopter> adopters = adopterService.getAllAdopters();
             model.addAttribute("adopters", adopters);
 
-            return "editAdoption";
+            return "adoptionEdit";
         }
         adoptionService.updateAdoption(adoption);
         return "redirect:/adoptions";

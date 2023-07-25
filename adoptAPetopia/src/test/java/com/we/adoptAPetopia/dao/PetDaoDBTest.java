@@ -229,4 +229,48 @@ class PetDaoDBTest {
         deleted = petDao.getPetById(pet.getId());
         assertNull(deleted);
     }
+
+    @Test
+    public void getPetsByBreed() {
+        Species species = new Species();
+        species.setName("Dog");
+        species.setDescription("Loyal tail-wagger, always by your side, spreading joy.");
+        species = speciesDao.addSpecies(species);
+
+        Shelter shelter = new Shelter();
+        shelter.setName("Pawsitive Haven");
+        shelter.setAddress("123 Park Ave, Anytown, USA");
+        shelter.setPhone("555-111-1111");
+        shelter = shelterDao.addShelter(shelter);
+
+        Breed breed = new Breed();
+        breed.setName("Golden Retriever");
+        breed.setDescription("Friendly, loyal, and intelligent family companion with a soft coat.");
+        breed = breedDao.addBreed(breed);
+        List<Breed> breeds = new ArrayList<>();
+        breeds.add(breed);
+
+        Pet pet1 = new Pet();
+        pet1.setName("Luna");
+        pet1.setSpecies(species);
+        pet1.setDescription("Energetic and playful canine companion.");
+        pet1.setShelter(shelter);
+        pet1.setBreeds(breeds);
+        pet1 = petDao.addPet(pet1);
+
+        Pet pet2 = new Pet();
+        pet2.setName("Moon");
+        pet2.setSpecies(species);
+        pet2.setDescription("Calm and sweet canine companion.");
+        pet2.setShelter(shelter);
+        pet2.setBreeds(breeds);
+        pet2 = petDao.addPet(pet2);
+
+        List<Pet> pets = petDao.getPetsByBreed(breed);
+        assertEquals(2, pets.size());
+
+        assertTrue(pets.contains(pet1));
+        assertTrue(pets.contains(pet2));
+
+    }
 }

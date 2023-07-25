@@ -118,4 +118,16 @@ public class PetDaoDB implements PetDao {
         final String DELETE_PET = "DELETE FROM pet WHERE petId = ?";
         jdbc.update(DELETE_PET, id);
     }
+
+    @Override
+    public List<Pet> getPetsByBreed(Breed breed) {
+        final String sql = "SELECT DISTINCT p.* FROM pet p " + "INNER JOIN petBreed pb ON p.petId = pb.petId " + "WHERE pb.breedId = ?";
+        List<Pet> pets = jdbc.query(sql, new PetMapper(), breed.getId());
+        for(Pet pet : pets) {
+            pet.setSpecies(getSpeciesForPet(pet.getId()));
+            pet.setShelter(getShelterForPet(pet.getId()));
+            pet.setBreeds(getBreedsForPet(pet.getId()));
+        }
+        return pets;
+    }
 }

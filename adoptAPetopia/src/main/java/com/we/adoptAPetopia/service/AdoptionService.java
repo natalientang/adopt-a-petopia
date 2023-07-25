@@ -1,10 +1,10 @@
-package com.we.adoptAPetopia.dao;
+package com.we.adoptAPetopia.service;
 
 import com.we.adoptAPetopia.entities.Adoption;
 
 import java.util.List;
 
-public interface AdoptionDao {
+public interface AdoptionService {
     Adoption getAdoptionById(int id);
     List<Adoption> getAllAdoptions();
     Adoption addAdoption(Adoption adoption);

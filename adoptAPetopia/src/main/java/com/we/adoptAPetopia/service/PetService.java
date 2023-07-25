@@ -1,11 +1,11 @@
-package com.we.adoptAPetopia.dao;
+package com.we.adoptAPetopia.service;
 
 import com.we.adoptAPetopia.entities.Breed;
 import com.we.adoptAPetopia.entities.Pet;
 
 import java.util.List;
 
-public interface PetDao {
+public interface PetService {
     Pet getPetById(int id);
     List<Pet> getAllPets();
     Pet addPet(Pet pet);

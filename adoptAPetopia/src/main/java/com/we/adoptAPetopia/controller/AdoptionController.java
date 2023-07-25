@@ -26,7 +26,7 @@ public class AdoptionController {
     AdopterService adopterService;
 
     @GetMapping("adoptions")
-    public String getAllAdoptions(Model model) {
+    public String displayAdoptions(Model model) {
         List<Adoption> adoptions = adoptionService.getAllAdoptions();
         model.addAttribute("adoptions", adoptions);
 

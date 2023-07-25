@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Google Fonts - Fredoka One -->
+    <!-- For Banner -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <!-- For Nav Links -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&family=Julius+Sans+One&display=swap" rel="stylesheet">
+
+    <title>Adopt-A-Petopia</title>
+    <style>
+        .cute-navbar {
+            background-color: #18ABDD;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .cute-navbar .navbar-brand {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .cute-navbar .nav-link {
+            color: white;
+            font-size: 18px;
+            font-family: 'Fredoka', cursive;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .cute-navbar .nav-link:hover {
+            color: #84D1EB;
+        }
+
+        td a {
+            font-family: 'Fredoka', cursive;
+            text-decoration: none;
+            color: #18ABDD;
+            transition: color 0.3s;
+        }
+
+        td a:hover {
+            color: #84D7F3;
+            text-decoration: none;
+        }
+
+        .form-error {
+            font-family: 'Fredoka', cursive;
+            color: #c12e38;
+            font-size: 17px;
+        }
+
+
+    </style>
+</head>
+<body>
+<!-- Main Body of Page -->
+<div class="container">
+    <!-- Nav Bar-->
+    <nav class="navbar cute-navbar relative-top">
+        <a class="navbar-brand text-white" href="/"
+           style="font-family: 'Fredoka One', cursive; font-size: 30px; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">
+            <img src="paw.png" alt="Paw Image" height="40" style="margin-right: 10px;">
+            <!-- Add the paw image to the left -->
+            <span style="color: #FF9B26;">Adopt</span>
+            <span>-A-</span>
+            <span style="color: #FF9B26;">Petopia</span>
+        </a>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="pets">Pets</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="species">Species</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="breeds">Breeds</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="adopters">Adopters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="shelters">Shelters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="adoptions">Adoptions</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Adopters Detail Page -->
+    <div class="row m-4">
+        <div class="col-6 text-right mt-3 mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">
+            <strong>Adopter Name:</strong></div>
+        <div class="col-6 text-left mt-3 mb-3">
+            <span th:text="${adopter.name}" style="font-family: 'Fredoka', cursive;">Display Adopter Name</span>
+        </div>
+
+        <div class="col-6 text-right mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;"><strong>Email:</strong>
+        </div>
+        <div class="col-6 text-left mb-3">
+            <span th:text="${adopter.email}" style="font-family: 'Fredoka', cursive;">Display Email</span>
+        </div>
+
+        <div class="col-6 text-right mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;"><strong>Phone
+            Number:</strong></div>
+        <div class="col-6 text-left mb-3">
+            <span th:text="${adopter.phone}" style="font-family: 'Fredoka', cursive;">Display Phone Number</span>
+        </div>
+        <div class="col-6 text-right mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;"><strong>Address:</strong>
+        </div>
+        <div class="col-6 text-left mb-3">
+            <span th:text="${adopter.address}" style="font-family: 'Fredoka', cursive;">Display Address</span>
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-3 mb-3">
+            <a href="#" th:href="@{/adopters}" class="btn"
+               style="font-family: 'Fredoka', cursive; background-color: #A7A7A7; color: white; margin: 40px 30px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s;"
+               onmouseover="this.style.backgroundColor='#E1E1E1';"
+               onmouseout="this.style.backgroundColor='#A7A7A7';">Back To Adopters</a>
+            <a href="#" th:href="@{/editAdopter(id=${adopter.id})}" class="btn"
+               style="font-family: 'Fredoka', cursive; background-color: #FF9B26; color: white; margin: 40px 30px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s;"
+               onmouseover="this.style.backgroundColor='#FFC581';"
+               onmouseout="this.style.backgroundColor='#FF9B26';">Edit</a>
+            <a href="#" th:href="@{/deleteAdopter(id=${adopter.id})}" class="btn"
+               style="font-family: 'Fredoka', cursive; background-color: #db303b; color: white; margin: 40px 30px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s;"
+               onmouseover="this.style.backgroundColor='#f75963';"
+               onmouseout="this.style.backgroundColor='#db303b';">Delete</a>
+        </div>
+    </div>
+
+
+    <!-- Bottom Banner -->
+    <div class="banner-image" style="background-image: url('pet-banner.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 100px;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100vw;
+                z-index: -1;">
+    </div>
+</div>
+<!-- End main body -->
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,11 +1,19 @@
 package com.we.adoptAPetopia.entities;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class Shelter {
     private int id;
+    @NotBlank(message = "Name must not be blank!")
+    @Size(max = 25, message = "Name must be fewer than 25 characters")
     private String name;
+    @NotBlank(message = "Address must not be blank!")
+    @Size(max = 255, message = "Address must be fewer than 255 characters")
     private String address;
+    @NotBlank(message = "Phone must not be blank!")
+    @Size(max = 25, message = "Phone must be fewer than 25 characters")
     private String phone;
 
     public int getId() {

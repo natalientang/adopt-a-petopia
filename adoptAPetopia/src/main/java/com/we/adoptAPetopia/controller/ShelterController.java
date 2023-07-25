@@ -28,13 +28,13 @@ public class ShelterController {
     public String displayAddShelter(Model model) {
         Shelter shelter = new Shelter();
         model.addAttribute("shelter", shelter);
-        return "addShelter";
+        return "shelterAdd";
     }
 
     @PostMapping("addShelter")
     public String addShelter(@Valid Shelter shelter, BindingResult result) {
         if (result.hasErrors()) {
-            return "addShelter";
+            return "shelterAdd";
         }
         shelterService.addShelter(shelter);
         return "redirect:/shelters";
@@ -44,13 +44,13 @@ public class ShelterController {
     public String displayEditShelter(Integer id, Model model) {
         Shelter shelter = shelterService.getShelterById(id);
         model.addAttribute("shelter", shelter);
-        return "editShelter";
+        return "shelterEdit";
     }
 
     @PostMapping("editShelter")
     public String editShelter(@Valid Shelter shelter, BindingResult result) {
         if (result.hasErrors()) {
-            return "editShelter";
+            return "shelterEdit";
         }
         shelterService.updateShelter(shelter);
         return "redirect:/shelters";

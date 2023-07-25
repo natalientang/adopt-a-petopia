@@ -1,7 +1,11 @@
 package com.we.adoptAPetopia.dao;
 
+import com.we.adoptAPetopia.entities.Adopter;
 import com.we.adoptAPetopia.entities.Adoption;
+import com.we.adoptAPetopia.entities.Pet;
+import com.we.adoptAPetopia.mappers.AdopterMapper;
 import com.we.adoptAPetopia.mappers.AdoptionMapper;
+import com.we.adoptAPetopia.mappers.PetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,7 +32,34 @@ public class AdoptionDaoDB implements AdoptionDao {
     @Override
     public List<Adoption> getAllAdoptions() {
         final String sql = "SELECT * FROM adoption";
-        return jdbc.query(sql, new AdoptionMapper());
+        List<Adoption> adoptionList = jdbc.query(sql, new AdoptionMapper());
+        return setPetAdopterToAdoptionList(adoptionList);
+    }
+
+    private List<Adoption> setPetAdopterToAdoptionList(List<Adoption> adoptionList) {
+        adoptionList.forEach(adoption -> {
+            adoption.setPet(getPetForAdoption(adoption.getPet().getId()));
+            adoption.setAdopter(getAdopterForAdoption(adoption.getAdopter().getId()));
+        });
+        return adoptionList;
+    }
+
+    private Adopter getAdopterForAdoption(int id) {
+        try {
+            final String GET_ADOPTER_ID = "SELECT * FROM adopter WHERE adopterId = ?";
+            return jdbc.queryForObject(GET_ADOPTER_ID, new AdopterMapper(), id);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    private Pet getPetForAdoption(int id) {
+        try {
+            final String GET_PET_ID = "SELECT * FROM pet WHERE petId = ?";
+            return jdbc.queryForObject(GET_PET_ID, new PetMapper(), id);
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
 
     @Override

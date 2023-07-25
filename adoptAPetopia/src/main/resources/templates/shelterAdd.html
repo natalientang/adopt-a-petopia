@@ -55,6 +55,13 @@
             text-decoration: none;
         }
 
+        .form-error {
+            font-family: 'Fredoka', cursive;
+            color: #c12e38;
+            font-size: 17px;
+            text-align: left;
+        }
+
     </style>
 </head>
 <body>
@@ -91,45 +98,58 @@
             </li>
         </ul>
     </nav>
-    <!-- Adopters Page -->
+    <!-- Add Adopters Page -->
     <div class="row m-4">
         <div class="col text-center">
             <div class="col text-center m-3">
-                <h2 class="mt-3 mb-5" style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Adopters</h2>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Name</th>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Email</th>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Phone Number</th>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Details</th>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Edit</th>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="adopter : ${adopters}">
-                        <td style="font-family: 'Fredoka', cursive;" th:text="${adopter.name}">Name</td>
-                        <td style="font-family: 'Fredoka', cursive;" th:text="${adopter.email}">Email</td>
-                        <td style="font-family: 'Fredoka', cursive;" th:text="${adopter.email}">Phone Number</td>
-                        <td style="font-family: 'Fredoka', cursive;"><a href="#"
-                                                                        th:href="@{/adopterDetail(id=${adopter.id})}">Details</a>
-                        </td>
-                        <td style="font-family: 'Fredoka', cursive;"><a href="#"
-                                                                        th:href="@{/editAdopter(id=${adopter.id})}">Edit</a>
-                        </td>
-                        <td style="font-family: 'Fredoka', cursive;"><a href="#"
-                                                                        th:href="@{/deleteAdopter(id=${adopter.id})}">Delete</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <a href="#" th:href="@{/addAdopter}" class="btn"
-                   style="font-family: 'Fredoka', cursive; background-color: #FF9B26; color: white; margin-top: 40px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s;"
-                   onmouseover="this.style.backgroundColor='#FFC581';"
-                   onmouseout="this.style.backgroundColor='#FF9B26';">
-                    Add Adopter
-                </a>
+                <h2 class="mt-3 mb-5" style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Add Shelter</h2>
+                <form action="/addShelter" method="POST">
+                    <div class="form-group row">
+                        <label for="name" class="col-3 col-form-label"
+                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Shelter Name:</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" id="name" name="name" th:value="${shelter.name}">
+                            <div th:if="${#fields.hasErrors('shelter.name')}">
+                                <p th:each="error : ${#fields.errors('shelter.name')}" class="form-error"
+                                   th:text="${error}"> Bad Shelter Name </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="address" class="col-3 col-form-label"
+                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Address:</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" id="address" name="address"
+                                   th:value="${shelter.address}">
+                            <div th:if="${#fields.hasErrors('shelter.address')}">
+                                <p th:each="error : ${#fields.errors('shelter.address')}" class="form-error"
+                                   th:text="${error}"> Bad Address </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="phone" class="col-3 col-form-label"
+                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Phone Number:</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" id="phone" name="phone" th:value="${shelter.phone}">
+                            <div th:if="${#fields.hasErrors('shelter.phone')}">
+                                <p th:each="error : ${#fields.errors('shelter.phone')}" class="form-error"
+                                   th:text="${error}"> Bad Phone Number </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="justify-content-center mb-3">
+                        <button type="submit" class="btn"
+                                style="font-family: 'Fredoka', cursive; background-color: #FF9B26; color: white; margin-top: 40px; margin-right: 10px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s; background-color: #FF9B26;"
+                                onmouseover="this.style.backgroundColor='#FFC581';"
+                                onmouseout="this.style.backgroundColor='#FF9B26';">Add Shelter
+                        </button>
+                        <a href="#" th:href="@{/shelters}" class="btn"
+                           style="font-family: 'Fredoka', cursive; background-color: #A7A7A7; color: white; margin-top: 40px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s; margin-left: 10px;"
+                           onmouseover="this.style.backgroundColor='#E1E1E1';"
+                           onmouseout="this.style.backgroundColor='#A7A7A7';">Cancel</a>
+                    </div>
+                </form>
             </div>
         </div>
 

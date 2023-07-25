@@ -100,8 +100,8 @@
     <div class="row m-4">
         <div class="col text-center">
             <div class="col text-center m-3">
-                <h2 class="mt-3 mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Add Adopter</h2>
-                <form action="/addAdopter" method="POST">
+                <h2 class="mt-3 mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Edit Adopter</h2>
+                <form th:action="@{/editAdopter(id=${adopter.id})}" method="POST">
                     <div class="form-group row">
                         <label for="name" class="col-3 col-form-label"
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Adopter Name:</label>
@@ -151,7 +151,7 @@
                         <button type="submit" class="btn"
                                 style="font-family: 'Fredoka', cursive; background-color: #FF9B26; color: white; margin-top: 40px; margin-right: 10px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s; background-color: #FF9B26;"
                                 onmouseover="this.style.backgroundColor='#FFC581';"
-                                onmouseout="this.style.backgroundColor='#FF9B26';">Add Adopter
+                                onmouseout="this.style.backgroundColor='#FF9B26';">Confirm
                         </button>
                         <a href="#" th:href="@{/adopters}" class="btn"
                            style="font-family: 'Fredoka', cursive; background-color: #A7A7A7; color: white; margin-top: 40px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s; margin-left: 10px;"

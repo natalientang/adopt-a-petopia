@@ -13,4 +13,6 @@ public interface PetService {
     void deletePetById(int id);
 
     List<Pet> getPetsByBreed(Breed breed);
+
+    List<Pet> getAvailablePets();
 }

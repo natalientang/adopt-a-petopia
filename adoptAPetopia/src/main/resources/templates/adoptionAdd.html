@@ -109,7 +109,7 @@
                         <label for="date" class="col-3 col-form-label"
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Date:</label>
                         <div class="col-9">
-                            <input type="datetime-local" class="form-control" id="date" name="adoptionDate" th:value="${adoption.date}">
+                            <input type="datetime-local" class="form-control" id="date" name="adoptionDate">
                             <div th:if="${#fields.hasErrors('adoption.date')}">
                                 <p th:each="error : ${#fields.errors('adoption.date')}" class="form-error"
                                    th:text="${error}"> Bad Date </p>

@@ -13,4 +13,5 @@ public interface AdoptionDao {
     void deleteAdoptionById(int id);
 
     List<Adoption> getAdoptionsByDate(LocalDateTime date);
+    List<Integer> getAdoptedPetIds();
 }

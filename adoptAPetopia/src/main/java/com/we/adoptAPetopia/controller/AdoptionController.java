@@ -38,6 +38,26 @@ public class AdoptionController {
         return "adoptions";
     }
 
+    @GetMapping("adoptionsByDate")
+    public String getAdoptionsByDate(Model model, HttpServletRequest request, LocalDateTime localDate) {
+        if (!request.getParameter("date").equals("")){
+            localDate = LocalDateTime.parse(request.getParameter("date"));
+        }
+        else{
+            List<Adopter> adopters = adopterService.getAllAdopters();
+            model.addAttribute("adopters", adopters);
+            return "adoptions";
+        }
+
+        List<Adoption> adoptions = adoptionService.getAdoptionsByDate(localDate);
+        model.addAttribute("adoptions", adoptions);
+
+        List<Adopter> adopters = adopterService.getAllAdopters();
+        model.addAttribute("adopters", adopters);
+
+        return "adoptions";
+    }
+
     @GetMapping("addAdoption")
     public String displayAddAdoption(Model model) {
         List<Pet> pets = petService.getAllPets();

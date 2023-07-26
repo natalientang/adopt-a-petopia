@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -83,5 +84,17 @@ public class AdoptionDaoDB implements AdoptionDao {
     public void deleteAdoptionById(int id) {
         final String sql = "DELETE FROM adoption WHERE adoptionId = ?";
         jdbc.update(sql, id);
+    }
+
+    @Override
+    public List<Adoption> getAdoptionsByDate(LocalDateTime date) {
+        try {
+            final String sql = "SELECT * FROM adoption WHERE date = ?";
+            List<Adoption> adoptionList = jdbc.query(sql, new AdoptionMapper(), date);
+
+            return setPetAdopterToAdoptionList(adoptionList);
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
 }

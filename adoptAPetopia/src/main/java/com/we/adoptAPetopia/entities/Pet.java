@@ -15,6 +15,7 @@ public class Pet {
     @Size(max = 255, message = "Description must be fewer than 255 characters")
     private String description;
     private Shelter shelter;
+    @Size(min = 1, message = "At least one breed must be selected!")
     private List<Breed> breeds;
 
     public int getId() {

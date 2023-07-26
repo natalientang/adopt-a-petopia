@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -106,7 +107,7 @@ public class AdoptionController {
     }
 
     @PostMapping("editAdoption")
-    public String editAdoption(@Valid Adoption adoption, BindingResult result, Model model) {
+    public String editAdoption(@Valid Adoption adoption, BindingResult result, HttpServletRequest request, Model model) {
         if (result.hasErrors()) {
             List<Pet> pets = petService.getAllPets();
             model.addAttribute("pets", pets);
@@ -116,6 +117,14 @@ public class AdoptionController {
 
             return "adoptionEdit";
         }
+
+        int petId = Integer.parseInt(request.getParameter("petId"));
+        int adopterId = Integer.parseInt(request.getParameter("adopterId"));
+
+        adoption.setPet(petService.getPetById(petId));
+        adoption.setAdopter(adopterService.getAdopterById(adopterId));
+        adoption.setDate(LocalDateTime.parse(request.getParameter("adoptionDate")));
+
         adoptionService.updateAdoption(adoption);
         return "redirect:/adoptions";
     }

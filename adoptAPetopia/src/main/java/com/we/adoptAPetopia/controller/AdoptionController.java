@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -44,11 +45,21 @@ public class AdoptionController {
         List<Adopter> adopters = adopterService.getAllAdopters();
         model.addAttribute("adopters", adopters);
 
+        model.addAttribute("adoption", new Adoption());
+
         return "adoptionAdd";
     }
 
     @PostMapping("addAdoption")
-    public String addAdoption(@Valid Adoption adoption, BindingResult result) {
+    public String addAdoption(@Valid Adoption adoption, HttpServletRequest request, BindingResult result, Model model) {
+        String petIds = request.getParameter("petId");
+        adoption.setPet(petService.getPetById(Integer.parseInt(petIds)));
+
+        String adopterIds = request.getParameter("adopterId");
+        adoption.setAdopter(adopterService.getAdopterById(Integer.parseInt(adopterIds)));
+
+        model.addAttribute("adoption", new Adoption());
+
         if (result.hasErrors()) {
             return "adoptionAdd";
         }

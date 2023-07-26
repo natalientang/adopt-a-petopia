@@ -12,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -59,7 +61,23 @@ public class PetController {
     }
 
     @PostMapping("addPet")
-    public String addPet(@Valid Pet pet, BindingResult result) {
+    public String addPet(@Valid Pet pet, BindingResult result, HttpServletRequest request, Model model) {
+        String shelterIds = request.getParameter("shelterId");
+        pet.setShelter(shelterService.getShelterById(Integer.parseInt(shelterIds)));
+
+        String speciesIds = request.getParameter("speciesId");
+        pet.setSpecies(speciesService.getSpeciesById(Integer.parseInt(speciesIds)));
+
+        String[] breedIds = request.getParameterValues("breedId");
+
+        model.addAttribute("pet", new Pet());
+
+        List<Breed> breedArrayList = new ArrayList<>();
+        for (String breedId : breedIds) {
+            breedArrayList.add(breedService.getBreedById(Integer.parseInt(breedId)));
+        }
+        pet.setBreeds(breedArrayList);
+
         if (result.hasErrors()) {
             return "petAdd";
         }
@@ -84,17 +102,24 @@ public class PetController {
     }
 
     @PostMapping("editPet")
-    public String editPet(@Valid Pet pet, BindingResult result, Model model) {
+    public String editPet(Integer id, HttpServletRequest request, BindingResult result) {
+        Pet pet = petService.getPetById(id);
+
+        String shelterIds = request.getParameter("shelterId");
+        pet.setShelter(shelterService.getShelterById(Integer.parseInt(shelterIds)));
+
+        String speciesIds = request.getParameter("speciesId");
+        pet.setSpecies(speciesService.getSpeciesById(Integer.parseInt(speciesIds)));
+
+        String [] breedIds = request.getParameterValues("breedId");
+
+        List<Breed> breedArrayList = new ArrayList<>();
+        for (String breedId : breedIds) {
+            breedArrayList.add(breedService.getBreedById(Integer.parseInt(breedId)));
+        }
+        pet.setBreeds(breedArrayList);
+
         if (result.hasErrors()) {
-            List<Shelter> shelters = shelterService.getAllShelters();
-            model.addAttribute("shelters", shelters);
-
-            List<Species> species = speciesService.getAllSpecies();
-            model.addAttribute("species", species);
-
-            List<Breed> breeds = breedService.getAllBreeds();
-            model.addAttribute("breeds", breeds);
-
             return "petEdit";
         }
         petService.updatePet(pet);

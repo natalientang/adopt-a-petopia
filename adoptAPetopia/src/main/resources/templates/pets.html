@@ -104,37 +104,6 @@
                                placeholder="Type Pet Name..." />
                     </div>
                 </div>
-                <!-- Add the filter options -->
-                <form action="petsByBreed" method="GET">
-                    <div class="form-group row">
-                        <label for="breed" class="col-form-label col-3"
-                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Search by
-                            Breed:</label>
-                        <div class="col-6">
-                            <select id="breed" name="breedId" class="form-control">
-                                <option disabled selected value="">-- Select Breed</option>
-                                <option th:each="breed : ${breeds}" th:value="${breed.id}"
-                                        th:text="${breed.name}">-- Select Breed
-                                </option>
-                            </select>
-                        </div>
-                        <!-- Add the search and reset buttons -->
-                        <div class="col-3">
-                            <button type="submit" class="btn"
-                                    style="font-family: 'Fredoka', cursive; background-color: #84d684; color: black; margin-right: 25px; border-radius: 20px; font-size: 17px; transition: background-color 0.3s;"
-                                    onmouseover="this.style.backgroundColor='#a5ffa5';"
-                                    onmouseout="this.style.backgroundColor='#84d684';">Search
-                            </button>
-                            <a href="pets">
-                                <button type="button" class="btn"
-                                        style="font-family: 'Fredoka', cursive; background-color: #A7A7A7; color: black; border-radius: 20px; font-size: 17px; transition: background-color 0.3s;"
-                                        onmouseover="this.style.backgroundColor='#E1E1E1';"
-                                        onmouseout="this.style.backgroundColor='#A7A7A7';">Reset
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </form>
                 <table class="table table-hover">
                     <thead>
                     <tr>

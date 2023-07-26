@@ -61,8 +61,8 @@ public class AdoptionController {
 
     @GetMapping("addAdoption")
     public String displayAddAdoption(Model model) {
-        List<Pet> pets = petService.getAllPets();
-        model.addAttribute("pets", pets);
+        List<Pet> availablePets = petService.getAvailablePets(); // Fetch only available pets
+        model.addAttribute("pets", availablePets);
 
         List<Adopter> adopters = adopterService.getAllAdopters();
         model.addAttribute("adopters", adopters);

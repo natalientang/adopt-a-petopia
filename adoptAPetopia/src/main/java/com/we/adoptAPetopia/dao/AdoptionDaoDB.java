@@ -130,4 +130,10 @@ public class AdoptionDaoDB implements AdoptionDao {
             return null;
         }
     }
+
+    @Override
+    public List<Integer> getAdoptedPetIds() {
+        final String sql = "SELECT petId FROM adoption";
+        return jdbc.queryForList(sql, Integer.class);
+    }
 }

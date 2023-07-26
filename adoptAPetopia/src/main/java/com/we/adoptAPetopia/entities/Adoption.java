@@ -2,15 +2,13 @@ package com.we.adoptAPetopia.entities;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Adoption {
     private int id;
-//    @DateTimeFormat(pattern = "MM-dd-yyyy'T'hh:mm a")
-//    @NotBlank(message = "Date must not be blank!")
     private LocalDateTime date;
     private Pet pet;
     private Adopter adopter;

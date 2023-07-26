@@ -20,7 +20,7 @@ public class AdoptionMapper implements RowMapper<Adoption> {
 
         Adoption adoption = new Adoption();
         adoption.setId(rs.getInt("adoptionId"));
-        adoption.setDate(rs.getObject("date", LocalDateTime.class));
+        adoption.setDate(rs.getObject("adoptionDate", LocalDateTime.class));
         adoption.setPet(pet);
         adoption.setAdopter(adopter);
         return adoption;

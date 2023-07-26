@@ -99,7 +99,7 @@
             </li>
         </ul>
     </nav>
-    <!-- Add Adopters Page -->
+    <!-- Add Pets Page -->
     <div class="row m-4">
         <div class="col text-center">
             <div class="col text-center m-3">
@@ -121,10 +121,11 @@
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Species:</label>
                         <div class="col-9">
                             <select id="species" name="speciesId" class="form-control">
-                                <option th:each="pet : ${pets}"
-                                        th:value="${pet.id}"
-                                        th:text="${pet.species}">
-                                    -- Select a Species
+                                <option disabled selected value="">-- Select Species </option>
+                                <option th:each="species : ${species}"
+                                        th:value="${species.id}"
+                                        th:text="${species.name}">
+                                    -- Select Species
                                 </option>
                             </select>
                         </div>
@@ -134,9 +135,9 @@
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Breed(s):</label>
                         <div class="col-9">
                             <select id="breed" name="breedId" class="form-control" multiple>
-                                <option th:each="pet : ${pets}"
-                                        th:value="${pet.id}"
-                                        th:text="${pet.breed}">
+                                <option th:each="breed : ${breeds}"
+                                        th:value="${breed.id}"
+                                        th:text="${breed.name}">
                                     -- Select Breed(s)
                                 </option>
                             </select>
@@ -144,7 +145,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="description" class="col-3 col-form-label"
-                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Pet Name:</label>
+                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Description:</label>
                         <div class="col-9">
                             <input type="text" class="form-control" id="description" name="description"
                                    th:value="${pet.description}">
@@ -159,10 +160,11 @@
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Shelter:</label>
                         <div class="col-9">
                             <select id="shelter" name="shelterId" class="form-control">
-                                <option th:each="pet : ${pets}"
-                                        th:value="${pet.id}"
-                                        th:text="${pet.shelter}">
-                                    -- Select a Shelter
+                                <option disabled selected value="">-- Select Shelter </option>
+                                <option th:each="shelter : ${shelters}"
+                                        th:value="${shelter.id}"
+                                        th:text="${shelter.name}">
+                                    -- Select Shelter
                                 </option>
                             </select>
                         </div>

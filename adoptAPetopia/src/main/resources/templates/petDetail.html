@@ -55,6 +55,16 @@
             text-decoration: none;
         }
 
+        .form-error {
+            font-family: 'Fredoka', cursive;
+            color: #c12e38;
+            font-size: 17px;
+        }
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -91,51 +101,54 @@
             </li>
         </ul>
     </nav>
-    <!-- Adoptions Page -->
+    <!-- Pets Detail Page -->
     <div class="row m-4">
-        <div class="col text-center">
-            <div class="col text-center m-3">
-                <h2 class="mt-3 mb-5" style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Adoptions</h2>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Date</th>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Pet Name</th>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Adopter Name</th>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Edit</th>
-                        <th style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="adoption : ${adoptions}">
-                        <td style="font-family: 'Fredoka', cursive;"
-                            th:text="${#temporals.format(adoption.date,'MM-dd-yyyy hh:mm a')}">Date
-                        </td>
-                        <td style="font-family: 'Fredoka', cursive;" th:text="${adoption.pet.name}">Pet Name</td>
-                        <td style="font-family: 'Fredoka', cursive;" th:text="${adoption.adopter.name}">Adopter Name
-                        </td>
-                        </td>
-                        <td style="font-family: 'Fredoka', cursive;"><a href="#"
-                                                                        th:href="@{/editAdoption(id=${adoption.id})}">Edit</a>
-                        </td>
-                        <td style="font-family: 'Fredoka', cursive;"><a href="#"
-                                                                        th:href="@{/deleteAdoption(id=${adoption.id})}">Delete</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <a href="#" th:href="@{/addAdoption}" class="btn"
-                   style="font-family: 'Fredoka', cursive; background-color: #FF9B26; color: white; margin-top: 40px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s;"
-                   onmouseover="this.style.backgroundColor='#FFC581';"
-                   onmouseout="this.style.backgroundColor='#FF9B26';">
-                    Add Adoption
-                </a>
-            </div>
+        <div class="col-6 text-right mt-3 mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">
+            <strong>Pet Name:</strong></div>
+        <div class="col-6 text-left mt-3 mb-3">
+            <span th:text="${pet.name}" style="font-family: 'Fredoka', cursive;">Display Pet Name</span>
         </div>
 
+        <div class="col-6 text-right mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;"><strong>Species:</strong>
+        </div>
+        <div class="col-6 text-left mb-3">
+            <span th:text="${pet.species.name}" style="font-family: 'Fredoka', cursive;">Display Species</span>
+        </div>
 
-        <!-- Bottom Banner -->
-        <div class="banner-image" style="background-image: url('pet-banner.png');
+        <div class="col-6 text-right mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;"><strong>Breed(s):</strong>
+        </div>
+        <div class="col-6 text-left mb-3">
+            <span th:each="breed : ${breeds}" style="font-family: 'Fredoka', cursive;"><span th:text="${breed.name}">Display Breed(s)</span><br/></span>
+        </div>
+        <div class="col-6 text-right mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;"><strong>Description:</strong>
+        </div>
+        <div class="col-6 text-left mb-3">
+            <span th:text="${pet.description}" style="font-family: 'Fredoka', cursive;">Display Description</span>
+        </div>
+        <div class="col-6 text-right mb-3" style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;"><strong>Shelter:</strong>
+        </div>
+        <div class="col-6 text-left mb-3">
+            <span th:text="${pet.shelter.name}" style="font-family: 'Fredoka', cursive;">Display Shelter</span>
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-3 mb-3">
+            <a href="#" th:href="@{/pets}" class="btn"
+               style="font-family: 'Fredoka', cursive; background-color: #A7A7A7; color: white; margin: 40px 30px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s;"
+               onmouseover="this.style.backgroundColor='#E1E1E1';"
+               onmouseout="this.style.backgroundColor='#A7A7A7';">Back To Pets</a>
+            <a href="#" th:href="@{/editPet(id=${pet.id})}" class="btn"
+               style="font-family: 'Fredoka', cursive; background-color: #FF9B26; color: white; margin: 40px 30px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s;"
+               onmouseover="this.style.backgroundColor='#FFC581';"
+               onmouseout="this.style.backgroundColor='#FF9B26';">Edit</a>
+            <a href="#" th:href="@{/deletePet(id=${pet.id})}" class="btn"
+               style="font-family: 'Fredoka', cursive; background-color: #db303b; color: white; margin: 40px 30px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s;"
+               onmouseover="this.style.backgroundColor='#f75963';"
+               onmouseout="this.style.backgroundColor='#db303b';">Delete</a>
+        </div>
+    </div>
+
+
+    <!-- Bottom Banner -->
+    <div class="banner-image" style="background-image: url('pet-banner.png');
                 background-repeat: no-repeat;
                 background-size: cover;
                 height: 100px;
@@ -144,7 +157,6 @@
                 left: 0;
                 width: 100vw;
                 z-index: -1;">
-        </div>
     </div>
 </div>
 <!-- End main body -->

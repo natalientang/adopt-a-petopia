@@ -98,7 +98,7 @@
             </li>
         </ul>
     </nav>
-    <!-- Add Adopters Page -->
+    <!-- Add Adoptions Page -->
     <div class="row m-4">
         <div class="col text-center">
             <div class="col text-center m-3">
@@ -122,6 +122,7 @@
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Pet Name:</label>
                         <div class="col-9">
                             <select id="petName" name="petId" class="form-control">
+                                <option disabled selected value="">-- Select Pet </option>
                                 <option th:each="pet : ${pets}"
                                         th:value="${pet.id}"
                                         th:text="${pet.name}">
@@ -135,10 +136,11 @@
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Adopter Name:</label>
                         <div class="col-9">
                             <select id="adopterName" name="adopterId" class="form-control">
+                                <option disabled selected value="">-- Select Adopter </option>
                                 <option th:each="adopter : ${adopters}"
                                         th:value="${adopter.id}"
                                         th:text="${adopter.name}">
-                                    -- Select an Adopter
+                                    -- Select Adopter
                                 </option>
                             </select>
                         </div>

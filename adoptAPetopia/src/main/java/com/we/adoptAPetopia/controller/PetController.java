@@ -50,15 +50,18 @@ public class PetController {
         List<Species> species = speciesService.getAllSpecies();
         model.addAttribute("species", species);
 
+        List<Breed> breeds = breedService.getAllBreeds();
+        model.addAttribute("breeds", breeds);
+
         model.addAttribute("pet", new Pet());
 
-        return "addPet";
+        return "petAdd";
     }
 
     @PostMapping("addPet")
     public String addPet(@Valid Pet pet, BindingResult result) {
         if (result.hasErrors()) {
-            return "addPet";
+            return "petAdd";
         }
         petService.addPet(pet);
         return "redirect:/pets";
@@ -66,9 +69,18 @@ public class PetController {
 
     @GetMapping("editPet")
     public String displayEditPet(Integer id, Model model) {
+        List<Shelter> shelters = shelterService.getAllShelters();
+        model.addAttribute("shelters", shelters);
+
+        List<Species> species = speciesService.getAllSpecies();
+        model.addAttribute("species", species);
+
+        List<Breed> breeds = breedService.getAllBreeds();
+        model.addAttribute("breeds", breeds);
+
         Pet pet = petService.getPetById(id);
         model.addAttribute("pet", pet);
-        return "editPet";
+        return "petEdit";
     }
 
     @PostMapping("editPet")
@@ -80,7 +92,10 @@ public class PetController {
             List<Species> species = speciesService.getAllSpecies();
             model.addAttribute("species", species);
 
-            return "editPet";
+            List<Breed> breeds = breedService.getAllBreeds();
+            model.addAttribute("breeds", breeds);
+
+            return "petEdit";
         }
         petService.updatePet(pet);
         return "redirect:/pets";

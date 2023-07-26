@@ -60,6 +60,13 @@ public class AdoptionController {
     public String displayEditAdoption(Integer id, Model model) {
         Adoption adoption = adoptionService.getAdoptionById(id);
         model.addAttribute("adoption", adoption);
+
+        List<Pet> pets = petService.getAllPets();
+        model.addAttribute("pets", pets);
+
+        List<Adopter> adopters = adopterService.getAllAdopters();
+        model.addAttribute("adopters", adopters);
+
         return "adoptionEdit";
     }
 

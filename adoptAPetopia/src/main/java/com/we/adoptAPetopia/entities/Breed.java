@@ -1,11 +1,17 @@
 package com.we.adoptAPetopia.entities;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 
 public class Breed {
     private int id;
+    @NotBlank(message = "Name must not be blank!")
+    @Size(max = 25, message = "Name must be fewer than 25 characters")
     private String name;
+    @NotBlank(message = "Description must not be blank!")
+    @Size(max = 255, message = "Description must be fewer than 255 characters")
     private String description;
     private List<Pet> pets;
 

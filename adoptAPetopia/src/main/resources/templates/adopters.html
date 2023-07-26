@@ -111,7 +111,7 @@
                     <tr th:each="adopter : ${adopters}">
                         <td style="font-family: 'Fredoka', cursive;" th:text="${adopter.name}">Name</td>
                         <td style="font-family: 'Fredoka', cursive;" th:text="${adopter.email}">Email</td>
-                        <td style="font-family: 'Fredoka', cursive;" th:text="${adopter.email}">Phone Number</td>
+                        <td style="font-family: 'Fredoka', cursive;" th:text="${adopter.phone}">Phone Number</td>
                         <td style="font-family: 'Fredoka', cursive;"><a href="#"
                                                                         th:href="@{/adopterDetail(id=${adopter.id})}">Details</a>
                         </td>

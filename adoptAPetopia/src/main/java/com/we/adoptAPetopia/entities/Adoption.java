@@ -9,8 +9,8 @@ import java.util.Objects;
 
 public class Adoption {
     private int id;
-    @DateTimeFormat(pattern = "MM-dd-yyyy'T'hh:mm a")
-    @NotBlank(message = "Date must not be blank!")
+//    @DateTimeFormat(pattern = "MM-dd-yyyy'T'hh:mm a")
+//    @NotBlank(message = "Date must not be blank!")
     private LocalDateTime date;
     private Pet pet;
     private Adopter adopter;

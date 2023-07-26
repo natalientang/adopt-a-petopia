@@ -98,34 +98,50 @@
             </li>
         </ul>
     </nav>
-    <!-- Edit Breeds Page -->
+    <!-- Edit Adoptions Page -->
     <div class="row m-4">
         <div class="col text-center">
             <div class="col text-center m-3">
                 <h2 class="mt-3 mb-5" style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Edit
-                    Breed</h2>
-                <form th:action="@{/editBreed(id=${breed.id})}" method="POST">
+                    Adoption</h2>
+                <form th:action="@{/editAdoption(id=${adoption.id})}" method="POST">
                     <div class="form-group row">
-                        <label for="name" class="col-3 col-form-label"
-                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Breed Name:</label>
+                        <label for="date" class="col-3 col-form-label"
+                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Date:</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="name" name="name" th:value="${breed.name}">
-                            <div th:if="${#fields.hasErrors('breed.name')}">
-                                <p th:each="error : ${#fields.errors('breed.name')}" class="form-error"
-                                   th:text="${error}"> Bad Breed Name </p>
+                            <input type="datetime-local" class="form-control" id="date" name="date" th:value="${adoption.date}">
+                            <div th:if="${#fields.hasErrors('adoption.date')}">
+                                <p th:each="error : ${#fields.errors('adoption.date')}" class="form-error"
+                                   th:text="${error}"> Bad Date</p>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="description" class="col-3 col-form-label"
-                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Description:</label>
+                        <label for="petName" class="col-3 col-form-label"
+                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Pet Name:</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="description" name="description"
-                                   th:value="${breed.description}">
-                            <div th:if="${#fields.hasErrors('breed.description')}">
-                                <p th:each="error : ${#fields.errors('breed.description')}" class="form-error"
-                                   th:text="${error}"> Bad Description </p>
-                            </div>
+                            <select id="petName" name="petId" class="form-control">
+                                <option th:each="pet : ${pets}"
+                                        th:value="${pet.id}"
+                                        th:text="${pet.name}"
+                                        th:selected="${adoption.pet.id == pet.id}">
+                                    -- Update Pet
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="adopterName" class="col-3 col-form-label"
+                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Adopter Name:</label>
+                        <div class="col-9">
+                            <select id="adopterName" name="adopterId" class="form-control">
+                                <option th:each="adopter : ${adopters}"
+                                        th:value="${adopter.id}"
+                                        th:text="${adopter.name}"
+                                        th:selected="${adoption.adopter.id == adopter.id}">
+                                    -- Update Adopter
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="justify-content-center mb-3">
@@ -134,7 +150,7 @@
                                 onmouseover="this.style.backgroundColor='#FFC581';"
                                 onmouseout="this.style.backgroundColor='#FF9B26';">Confirm
                         </button>
-                        <a href="#" th:href="@{/breeds}" class="btn"
+                        <a href="#" th:href="@{/adoptions}" class="btn"
                            style="font-family: 'Fredoka', cursive; background-color: #A7A7A7; color: white; margin-top: 40px; border-radius: 20px; font-size: 20px; transition: background-color 0.3s; margin-left: 10px;"
                            onmouseover="this.style.backgroundColor='#E1E1E1';"
                            onmouseout="this.style.backgroundColor='#A7A7A7';">Cancel</a>

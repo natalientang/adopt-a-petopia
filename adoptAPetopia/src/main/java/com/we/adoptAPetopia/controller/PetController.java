@@ -81,6 +81,10 @@ public class PetController {
         if (result.hasErrors()) {
             return "petAdd";
         }
+
+        pet.setName(capitalizeInput(pet.getName()));
+        pet.setDescription((capitalizeFirstLetterWord(pet.getDescription())));
+
         petService.addPet(pet);
         return "redirect:/pets";
     }
@@ -102,7 +106,7 @@ public class PetController {
     }
 
     @PostMapping("editPet")
-    public String editPet(Integer id, HttpServletRequest request, BindingResult result) {
+    public String editPet(Integer id, BindingResult result, HttpServletRequest request) {
         Pet pet = petService.getPetById(id);
 
         String shelterIds = request.getParameter("shelterId");
@@ -122,6 +126,10 @@ public class PetController {
         if (result.hasErrors()) {
             return "petEdit";
         }
+
+        pet.setName(capitalizeInput(pet.getName()));
+        pet.setDescription((capitalizeFirstLetterWord(pet.getDescription())));
+
         petService.updatePet(pet);
         return "redirect:/pets";
     }
@@ -141,5 +149,37 @@ public class PetController {
         model.addAttribute("breeds", getPetsByBreed);
 
         return "petDetail";
+    }
+
+    // Method to capitalize first letter of every word
+    private String capitalizeInput(String str) {
+        if (str.length() == 0) {
+            return "";
+        } else {
+            // Split the input string into individual words based on spaces.
+            String[] words = str.split(" ");
+            StringBuilder capitalizedString = new StringBuilder();
+
+            for (String word : words) {
+                if (!word.isEmpty()) {
+                    // Capitalize the first letter of the word and append it to the result.
+                    capitalizedString.append(word.substring(0, 1).toUpperCase()).append(word.substring(1));
+
+                    // Add a space between words (preserve original spaces from the input).
+                    capitalizedString.append(" ");
+                }
+            }
+
+            // Remove the trailing space and return the final capitalized string.
+            return capitalizedString.toString().trim();
+        }
+    }
+
+    // Method tp capitalize first letter of first word
+    private String capitalizeFirstLetterWord(String str){
+        // If input string is empty, it will return empty string
+        // Otherwise, extracts first character and converts to uppercase
+        // Then it extracts rest of string and concatenates first char with rest of string
+        return str.length() == 0 ? "" : str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 }

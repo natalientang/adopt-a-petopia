@@ -1,11 +1,7 @@
 package com.we.adoptAPetopia.dao;
 
-import com.we.adoptAPetopia.entities.Adopter;
-import com.we.adoptAPetopia.entities.Adoption;
-import com.we.adoptAPetopia.entities.Pet;
-import com.we.adoptAPetopia.mappers.AdopterMapper;
-import com.we.adoptAPetopia.mappers.AdoptionMapper;
-import com.we.adoptAPetopia.mappers.PetMapper;
+import com.we.adoptAPetopia.entities.*;
+import com.we.adoptAPetopia.mappers.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -57,7 +53,33 @@ public class AdoptionDaoDB implements AdoptionDao {
     private Pet getPetForAdoption(int id) {
         try {
             final String GET_PET_ID = "SELECT * FROM pet WHERE petId = ?";
-            return jdbc.queryForObject(GET_PET_ID, new PetMapper(), id);
+            Pet pet = jdbc.queryForObject(GET_PET_ID, new PetMapper(), id);
+            if (pet != null && pet.getShelter() != null && pet.getSpecies() != null) {
+                int idShelter = pet.getShelter().getId();
+                Shelter shelterPet = getShelterForPet(idShelter);
+                pet.setShelter(shelterPet);
+
+                int idSpecies = pet.getSpecies().getId();
+                Species speciesPet = getSpeciesForPet(idSpecies);
+                pet.setSpecies(speciesPet);
+            }
+            return pet;
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    private Species getSpeciesForPet(int idSpecies) {
+        try{
+            return jdbc.queryForObject("SELECT * FROM species WHERE speciesId = ?", new SpeciesMapper(), idSpecies);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    private Shelter getShelterForPet(int idShelter) {
+        try{
+            return jdbc.queryForObject("SELECT * FROM shelter WHERE shelterId = ?", new ShelterMapper(), idShelter);
         } catch (DataAccessException ex) {
             return null;
         }
@@ -66,17 +88,28 @@ public class AdoptionDaoDB implements AdoptionDao {
     @Override
     @Transactional
     public Adoption addAdoption(Adoption adoption) {
-        final String sql = "INSERT INTO adoption(date, petId, adopterId) " + "VALUES(?,?,?)";
-        jdbc.update(sql, adoption.getDate(), adoption.getPet().getId(), adoption.getAdopter().getId());
+        try {
+            final String sql = "INSERT INTO adoption(adoptionDate, petId, adopterId) " + "VALUES(?,?,?)";
+            jdbc.update(sql, adoption.getDate(), adoption.getPet().getId(), adoption.getAdopter().getId());
 
-        int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        adoption.setId(newId);
-        return adoption;
+            int lastId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+            adoption.setId(lastId);
+
+            Adopter adopter = getAdopterForAdoption(adoption.getAdopter().getId());
+            Pet pet = getPetForAdoption(adoption.getPet().getId());
+
+            adoption.setPet(pet);
+            adoption.setAdopter(adopter);
+
+            return adoption;
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
 
     @Override
     public void updateAdoption(Adoption adoption) {
-        final String sql = "UPDATE adoption SET date = ?, petId = ?, adopterId = ? WHERE adoptionId = ?";
+        final String sql = "UPDATE adoption SET adoptionDate = ?, petId = ?, adopterId = ? WHERE adoptionId = ?";
         jdbc.update(sql, adoption.getDate(), adoption.getPet().getId(), adoption.getAdopter().getId(), adoption.getId());
     }
 
@@ -89,7 +122,7 @@ public class AdoptionDaoDB implements AdoptionDao {
     @Override
     public List<Adoption> getAdoptionsByDate(LocalDateTime date) {
         try {
-            final String sql = "SELECT * FROM adoption WHERE date = ?";
+            final String sql = "SELECT * FROM adoption WHERE adoptionDate = ?";
             List<Adoption> adoptionList = jdbc.query(sql, new AdoptionMapper(), date);
 
             return setPetAdopterToAdoptionList(adoptionList);

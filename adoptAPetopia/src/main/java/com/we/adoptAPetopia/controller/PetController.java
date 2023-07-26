@@ -82,8 +82,6 @@ public class PetController {
 
         String[] breedIds = request.getParameterValues("breedId");
 
-        model.addAttribute("pet", new Pet());
-
         List<Breed> breedArrayList = new ArrayList<>();
         for (String breedId : breedIds) {
             breedArrayList.add(breedService.getBreedById(Integer.parseInt(breedId)));
@@ -91,6 +89,14 @@ public class PetController {
         pet.setBreeds(breedArrayList);
 
         if (result.hasErrors()) {
+            List<Shelter> shelters = shelterService.getAllShelters();
+            model.addAttribute("shelters", shelters);
+
+            List<Species> species = speciesService.getAllSpecies();
+            model.addAttribute("species", species);
+
+            List<Breed> breeds = breedService.getAllBreeds();
+            model.addAttribute("breeds", breeds);
             return "petAdd";
         }
 

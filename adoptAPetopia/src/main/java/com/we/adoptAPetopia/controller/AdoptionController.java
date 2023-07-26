@@ -66,7 +66,8 @@ public class AdoptionController {
         List<Adopter> adopters = adopterService.getAllAdopters();
         model.addAttribute("adopters", adopters);
 
-        model.addAttribute("adoption", new Adoption());
+        Adoption adoption = new Adoption();
+        model.addAttribute("adoption", adoption);
 
         return "adoptionAdd";
     }
@@ -79,11 +80,9 @@ public class AdoptionController {
         String adopterIds = request.getParameter("adopterId");
         adoption.setAdopter(adopterService.getAdopterById(Integer.parseInt(adopterIds)));
 
-        String date = request.getParameter("date");
+        String date = request.getParameter("adoptionDate");
         LocalDateTime dateTime = LocalDateTime.parse(date);
         adoption.setDate(dateTime);
-
-        model.addAttribute("adoption", new Adoption());
 
         if (result.hasErrors()) {
             return "adoptionAdd";

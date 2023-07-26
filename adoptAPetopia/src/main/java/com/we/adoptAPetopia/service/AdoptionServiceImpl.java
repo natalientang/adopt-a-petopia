@@ -5,6 +5,7 @@ import com.we.adoptAPetopia.entities.Adoption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,5 +36,10 @@ public class AdoptionServiceImpl implements AdoptionService {
     @Override
     public void deleteAdoptionById(int id) {
         adoptionDao.deleteAdoptionById(id);
+    }
+
+    @Override
+    public List<Adoption> getAdoptionsByDate(LocalDateTime date) {
+        return adoptionDao.getAdoptionsByDate(date);
     }
 }

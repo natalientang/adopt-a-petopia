@@ -44,6 +44,18 @@ public class PetController {
         return "pets";
     }
 
+    @GetMapping("petsByBreed")
+    public String getPetsByBreed(Integer breedId, Model model) {
+        Breed breed = breedService.getBreedById(breedId);
+        List<Pet> pets = petService.getPetsByBreed(breed);
+        model.addAttribute("pets", pets);
+
+        List<Breed> breeds = breedService.getAllBreeds();
+        model.addAttribute("breeds", breeds);
+
+        return "pets";
+    }
+
     @GetMapping("addPet")
     public String displayAddPet(Model model) {
         List<Shelter> shelters = shelterService.getAllShelters();
@@ -106,20 +118,20 @@ public class PetController {
     }
 
     @PostMapping("editPet")
-    public String editPet(Integer id, BindingResult result, HttpServletRequest request) {
-        Pet pet = petService.getPetById(id);
-
+    public String editPet(@Valid Pet pet, BindingResult result, HttpServletRequest request) {
         String shelterIds = request.getParameter("shelterId");
         pet.setShelter(shelterService.getShelterById(Integer.parseInt(shelterIds)));
 
         String speciesIds = request.getParameter("speciesId");
         pet.setSpecies(speciesService.getSpeciesById(Integer.parseInt(speciesIds)));
 
-        String [] breedIds = request.getParameterValues("breedId");
+        String[] breedIds = request.getParameterValues("breedId");
 
         List<Breed> breedArrayList = new ArrayList<>();
-        for (String breedId : breedIds) {
-            breedArrayList.add(breedService.getBreedById(Integer.parseInt(breedId)));
+        if (breedIds != null) {
+            for (String breedId : breedIds) {
+                breedArrayList.add(breedService.getBreedById(Integer.parseInt(breedId)));
+            }
         }
         pet.setBreeds(breedArrayList);
 

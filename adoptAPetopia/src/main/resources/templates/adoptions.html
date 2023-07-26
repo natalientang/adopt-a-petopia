@@ -96,6 +96,32 @@
         <div class="col text-center">
             <div class="col text-center m-3">
                 <h2 class="mt-3 mb-5" style="font-family: 'Fredoka One', cursive; letter-spacing: 2px;">Adoptions</h2>
+                <!-- Add the filter options -->
+                <form action="adoptionsByDate" method="GET">
+                    <div class="form-group row">
+                        <label for="date" class="col-form-label col-3"
+                               style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Filter by
+                            Date & Time:</label>
+                        <div class="col-6">
+                            <input type="datetime-local" class="form-control" id="date" name="date">
+                        </div>
+                        <!-- Add the search and reset buttons -->
+                        <div class="col-3">
+                            <button type="submit" class="btn"
+                                    style="font-family: 'Fredoka', cursive; background-color: #84d684; color: black; margin-right: 25px; border-radius: 20px; font-size: 17px; transition: background-color 0.3s;"
+                                    onmouseover="this.style.backgroundColor='#a5ffa5';"
+                                    onmouseout="this.style.backgroundColor='#84d684';">Search
+                            </button>
+                            <a href="adoptions">
+                                <button type="button" class="btn"
+                                        style="font-family: 'Fredoka', cursive; background-color: #A7A7A7; color: black; border-radius: 20px; font-size: 17px; transition: background-color 0.3s;"
+                                        onmouseover="this.style.backgroundColor='#E1E1E1';"
+                                        onmouseout="this.style.backgroundColor='#A7A7A7';">Reset
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </form>
                 <table class="table table-hover">
                     <thead>
                     <tr>

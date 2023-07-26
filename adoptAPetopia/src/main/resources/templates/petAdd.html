@@ -63,6 +63,7 @@
         }
 
 
+
     </style>
 </head>
 <body>
@@ -121,7 +122,7 @@
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Species:</label>
                         <div class="col-9">
                             <select id="species" name="speciesId" class="form-control">
-                                <option disabled selected value="">-- Select Species </option>
+                                <option disabled selected value="">-- Select Species</option>
                                 <option th:each="species : ${species}"
                                         th:value="${species.id}"
                                         th:text="${species.name}">
@@ -141,6 +142,10 @@
                                     -- Select Breed(s)
                                 </option>
                             </select>
+                            <div th:if="${#fields.hasErrors('breeds')}">
+                                <p class="form-error" th:each="error : ${#fields.errors('breeds')}"
+                                   th:text="${error}">Bad Pet Breed</p>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -160,7 +165,7 @@
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Shelter:</label>
                         <div class="col-9">
                             <select id="shelter" name="shelterId" class="form-control">
-                                <option disabled selected value="">-- Select Shelter </option>
+                                <option disabled selected value="">-- Select Shelter</option>
                                 <option th:each="shelter : ${shelters}"
                                         th:value="${shelter.id}"
                                         th:text="${shelter.name}">

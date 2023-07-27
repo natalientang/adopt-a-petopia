@@ -109,7 +109,7 @@
                         <label for="date" class="col-3 col-form-label"
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Date:</label>
                         <div class="col-9">
-                            <input type="datetime-local" class="form-control" id="date" name="adoptionDate">
+                            <input type="datetime-local" class="form-control" id="date" name="adoptionDate" required>
                             <div th:if="${#fields.hasErrors('adoption.date')}">
                                 <p th:each="error : ${#fields.errors('adoption.date')}" class="form-error"
                                    th:text="${error}"> Bad Date </p>
@@ -120,7 +120,7 @@
                         <label for="petName" class="col-3 col-form-label"
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Pet Name:</label>
                         <div class="col-9">
-                            <select id="petName" name="petId" class="form-control">
+                            <select id="petName" name="petId" class="form-control" required>
                                 <option disabled selected value="">-- Select Pet </option>
                                 <option th:each="pet : ${pets}"
                                         th:value="${pet.id}"
@@ -128,16 +128,13 @@
                                     -- Select Pet
                                 </option>
                             </select>
-<!--                            <div th:if="${#fields.hasErrors('petId')}">-->
-<!--                                <p class="form-error" th:each="error : ${#fields.errors('petId')}" th:text="${error}"></p>-->
-<!--                            </div>-->
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="adopterName" class="col-3 col-form-label"
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Adopter Name:</label>
                         <div class="col-9">
-                            <select id="adopterName" name="adopterId" class="form-control">
+                            <select id="adopterName" name="adopterId" class="form-control" required>
                                 <option disabled selected value="">-- Select Adopter </option>
                                 <option th:each="adopter : ${adopters}"
                                         th:value="${adopter.id}"
@@ -145,9 +142,6 @@
                                     -- Select Adopter
                                 </option>
                             </select>
-<!--                            <div th:if="${#fields.hasErrors('adopterId')}">-->
-<!--                                <p class="form-error" th:each="error : ${#fields.errors('adopterId')}" th:text="${error}"></p>-->
-<!--                            </div>-->
                         </div>
                     </div>
                     <div class="justify-content-center mb-3">

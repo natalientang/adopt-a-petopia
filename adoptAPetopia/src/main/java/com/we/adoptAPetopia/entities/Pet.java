@@ -7,11 +7,11 @@ import java.util.Objects;
 
 public class Pet {
     private int id;
-    @NotBlank(message = "Name must not be blank!")
+    @NotBlank(message = "Please input a name!")
     @Size(max = 25, message = "Name must be fewer than 25 characters")
     private String name;
     private Species species;
-    @NotBlank(message = "Description must not be blank!")
+    @NotBlank(message = "Please input a description!")
     @Size(max = 255, message = "Description must be fewer than 255 characters")
     private String description;
     private Shelter shelter;

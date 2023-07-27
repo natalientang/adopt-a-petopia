@@ -122,7 +122,6 @@
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Species:</label>
                         <div class="col-9">
                             <select id="species" name="speciesId" class="form-control">
-
                                 <option th:each="species : ${species}"
                                         th:value="${species.id}"
                                         th:text="${species.name}">
@@ -162,7 +161,6 @@
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Shelter:</label>
                         <div class="col-9">
                             <select id="shelter" name="shelterId" class="form-control">
-
                                 <option th:each="shelter : ${shelters}"
                                         th:value="${shelter.id}"
                                         th:text="${shelter.name}">

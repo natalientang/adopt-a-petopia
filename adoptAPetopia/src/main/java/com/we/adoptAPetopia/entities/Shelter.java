@@ -6,13 +6,13 @@ import java.util.Objects;
 
 public class Shelter {
     private int id;
-    @NotBlank(message = "Name must not be blank!")
+    @NotBlank(message = "Please input a name!")
     @Size(max = 25, message = "Name must be fewer than 25 characters")
     private String name;
-    @NotBlank(message = "Address must not be blank!")
+    @NotBlank(message = "Please input an address")
     @Size(max = 255, message = "Address must be fewer than 255 characters")
     private String address;
-    @NotBlank(message = "Phone must not be blank!")
+    @NotBlank(message = "Please input a phone number!")
     @Size(max = 25, message = "Phone must be fewer than 25 characters")
     private String phone;
 

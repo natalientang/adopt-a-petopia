@@ -31,27 +31,52 @@
 
         .cute-navbar .nav-link {
             color: white;
-            font-size: 18px;
+            font-size: 16px;
             font-family: 'Fredoka', cursive;
             margin: 0 10px;
             text-decoration: none;
             transition: color 0.3s ease;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .cute-navbar .nav-link:hover {
             color: #84D1EB;
         }
 
-        td a {
+        .btn-details {
             font-family: 'Fredoka', cursive;
             text-decoration: none;
             color: #18ABDD;
             transition: color 0.3s;
         }
 
-        td a:hover {
+        .btn-details:hover {
             color: #84D7F3;
+            text-decoration: none;
+        }
+
+        .btn-edit {
+            font-family: 'Fredoka', cursive;
+            text-decoration: none;
+            color: #FF9B26;
+            transition: color 0.3s;
+        }
+
+        .btn-edit:hover {
+            color: #FFC581;
+            text-decoration: none;
+        }
+
+        .btn-delete {
+            font-family: 'Fredoka', cursive;
+            text-decoration: none;
+            color: #db303b;
+            transition: color 0.3s;
+        }
+
+        .btn-delete:hover {
+            color: #f98187;
             text-decoration: none;
         }
 
@@ -111,13 +136,13 @@
                         <td style="font-family: 'Fredoka', cursive;" th:text="${breed.name}">Name</td>
                         <td style="font-family: 'Fredoka', cursive;" th:text="${breed.description}">Description</td>
                         <td style="font-family: 'Fredoka', cursive;"><a href="#"
-                                                                        th:href="@{/breedDetail(id=${breed.id})}">Details</a>
+                                                                        th:href="@{/breedDetail(id=${breed.id})}" class="btn-details">Details</a>
                         </td>
                         <td style="font-family: 'Fredoka', cursive;"><a href="#"
-                                                                        th:href="@{/editBreed(id=${breed.id})}">Edit</a>
+                                                                        th:href="@{/editBreed(id=${breed.id})}" class="btn-edit">Edit</a>
                         </td>
                         <td style="font-family: 'Fredoka', cursive;"><a href="#"
-                                                                        th:href="@{/deleteBreed(id=${breed.id})}">Delete</a>
+                                                                        th:href="@{/deleteBreed(id=${breed.id})}" class="btn-delete">Delete</a>
                         </td>
                     </tr>
                     </tbody>

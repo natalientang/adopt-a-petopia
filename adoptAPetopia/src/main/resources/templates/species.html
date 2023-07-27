@@ -31,27 +31,40 @@
 
         .cute-navbar .nav-link {
             color: white;
-            font-size: 18px;
+            font-size: 16px;
             font-family: 'Fredoka', cursive;
             margin: 0 10px;
             text-decoration: none;
             transition: color 0.3s ease;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .cute-navbar .nav-link:hover {
             color: #84D1EB;
         }
 
-        td a {
+        .btn-edit {
             font-family: 'Fredoka', cursive;
             text-decoration: none;
-            color: #18ABDD;
+            color: #FF9B26;
             transition: color 0.3s;
         }
 
-        td a:hover {
-            color: #84D7F3;
+        .btn-edit:hover {
+            color: #FFC581;
+            text-decoration: none;
+        }
+
+        .btn-delete {
+            font-family: 'Fredoka', cursive;
+            text-decoration: none;
+            color: #db303b;
+            transition: color 0.3s;
+        }
+
+        .btn-delete:hover {
+            color: #f98187;
             text-decoration: none;
         }
 
@@ -110,10 +123,10 @@
                         <td style="font-family: 'Fredoka', cursive;" th:text="${species.name}">Name</td>
                         <td style="font-family: 'Fredoka', cursive;" th:text="${species.description}">Description</td>
                         <td style="font-family: 'Fredoka', cursive;"><a href="#"
-                                                                        th:href="@{/editSpecies(id=${species.id})}">Edit</a>
+                                                                        th:href="@{/editSpecies(id=${species.id})}" class="btn-edit">Edit</a>
                         </td>
                         <td style="font-family: 'Fredoka', cursive;"><a href="#"
-                                                                        th:href="@{/deleteSpecies(id=${species.id})}">Delete</a>
+                                                                        th:href="@{/deleteSpecies(id=${species.id})}" class="btn-delete">Delete</a>
                         </td>
                     </tr>
                     </tbody>

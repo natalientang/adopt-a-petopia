@@ -110,7 +110,7 @@
                         <label for="name" class="col-3 col-form-label"
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Pet Name:</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="name" name="name" th:value="${pet.name}">
+                            <input type="text" class="form-control" id="name" name="name" th:value="${pet.name}" required>
                             <div th:if="${#fields.hasErrors('pet.name')}">
                                 <p th:each="error : ${#fields.errors('pet.name')}" class="form-error"
                                    th:text="${error}"> Bad Pet Name </p>
@@ -150,7 +150,7 @@
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Description:</label>
                         <div class="col-9">
                             <input type="text" class="form-control" id="description" name="description"
-                                   th:value="${pet.description}">
+                                   th:value="${pet.description}" required>
                             <div th:if="${#fields.hasErrors('pet.description')}">
                                 <p th:each="error : ${#fields.errors('pet.description')}" class="form-error"
                                    th:text="${error}"> Bad Description </p>
@@ -191,7 +191,7 @@
         <div class="banner-image" style="background-image: url('pet-banner.png');
                 background-repeat: no-repeat;
                 background-size: cover;
-                height: 100px;
+                height: 80px;
                 position: fixed;
                 bottom: 0;
                 left: 0;

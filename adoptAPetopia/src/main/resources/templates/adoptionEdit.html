@@ -109,7 +109,7 @@
                         <label for="date" class="col-3 col-form-label"
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Date:</label>
                         <div class="col-9">
-                            <input type="datetime-local" class="form-control" id="date" name="adoptionDate" th:value="${adoption.date}">
+                            <input type="datetime-local" class="form-control" id="date" name="adoptionDate" th:value="${adoption.date}" required>
                             <div th:if="${#fields.hasErrors('adoption.date')}">
                                 <p th:each="error : ${#fields.errors('adoption.date')}" class="form-error"
                                    th:text="${error}"> Bad Date</p>
@@ -120,12 +120,13 @@
                         <label for="petName" class="col-3 col-form-label"
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Pet Name:</label>
                         <div class="col-9">
-                            <select id="petName" name="petId" class="form-control">
+                            <select id="petName" name="petId" class="form-control" required>
+                                <option disabled selected value="">-- Select Pet --</option>
                                 <option th:each="pet : ${pets}"
                                         th:value="${pet.id}"
                                         th:text="${pet.name}"
                                         th:selected="${adoption.pet.id == pet.id}">
-                                    -- Update Pet
+                                    -- Update Pet Name
                                 </option>
                             </select>
                         </div>
@@ -134,7 +135,7 @@
                         <label for="adopterName" class="col-3 col-form-label"
                                style="font-family: 'Fredoka One', cursive; letter-spacing: 1px;">Adopter Name:</label>
                         <div class="col-9">
-                            <select id="adopterName" name="adopterId" class="form-control">
+                            <select id="adopterName" name="adopterId" class="form-control" required>
                                 <option th:each="adopter : ${adopters}"
                                         th:value="${adopter.id}"
                                         th:text="${adopter.name}"
@@ -164,7 +165,7 @@
         <div class="banner-image" style="background-image: url('pet-banner.png');
                 background-repeat: no-repeat;
                 background-size: cover;
-                height: 100px;
+                height: 80px;
                 position: fixed;
                 bottom: 0;
                 left: 0;

@@ -9,7 +9,7 @@ public class Shelter {
     @NotBlank(message = "Please input a name!")
     @Size(max = 25, message = "Name must be fewer than 25 characters")
     private String name;
-    @NotBlank(message = "Please input an address")
+    @NotBlank(message = "Please input an address!")
     @Size(max = 255, message = "Address must be fewer than 255 characters")
     private String address;
     @NotBlank(message = "Please input a phone number!")

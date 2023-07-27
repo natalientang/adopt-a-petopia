@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class PetController {
@@ -97,6 +98,7 @@ public class PetController {
 
             List<Breed> breeds = breedService.getAllBreeds();
             model.addAttribute("breeds", breeds);
+
             return "petAdd";
         }
 
@@ -109,6 +111,9 @@ public class PetController {
 
     @GetMapping("editPet")
     public String displayEditPet(Integer id, Model model) {
+        Pet pet = petService.getPetById(id);
+        model.addAttribute("pet", pet);
+
         List<Shelter> shelters = shelterService.getAllShelters();
         model.addAttribute("shelters", shelters);
 
@@ -118,13 +123,18 @@ public class PetController {
         List<Breed> breeds = breedService.getAllBreeds();
         model.addAttribute("breeds", breeds);
 
-        Pet pet = petService.getPetById(id);
-        model.addAttribute("pet", pet);
+        // Pass the selected breed IDs as a list of integers to the Thymeleaf template
+        List<Integer> selectedBreedIds = pet.getBreeds().stream()
+                .map(Breed::getId)
+                .collect(Collectors.toList());
+        model.addAttribute("selectedBreedIds", selectedBreedIds);
+
         return "petEdit";
     }
 
+
     @PostMapping("editPet")
-    public String editPet(@Valid Pet pet, BindingResult result, HttpServletRequest request) {
+    public String editPet(@Valid Pet pet, BindingResult result, HttpServletRequest request, Model model) {
         String shelterIds = request.getParameter("shelterId");
         pet.setShelter(shelterService.getShelterById(Integer.parseInt(shelterIds)));
 
@@ -142,6 +152,14 @@ public class PetController {
         pet.setBreeds(breedArrayList);
 
         if (result.hasErrors()) {
+            List<Shelter> shelters = shelterService.getAllShelters();
+            model.addAttribute("shelters", shelters);
+
+            List<Species> species = speciesService.getAllSpecies();
+            model.addAttribute("species", species);
+
+            List<Breed> breeds = breedService.getAllBreeds();
+            model.addAttribute("breeds", breeds);
             return "petEdit";
         }
 
